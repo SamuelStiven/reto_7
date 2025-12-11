@@ -19,6 +19,11 @@ class Rectangle(Shape):
                  Line(top_left, bottom_left)]
         
         super().__init__(vertices=vertices, edges=edges)
+    
+    @classmethod
+    def from_points(cls, point1: 'Point', point2: 'Point'):
+        # Create a rectangle from two opposite points
+        return cls(point1, point2)
         
     def compute_area(self):
         return self._edges[0].length() * self._edges[1].length()
@@ -40,3 +45,7 @@ class Square(Rectangle):
         super().__init__(point1, point2)
         if self._edges[0].length() != self._edges[1].length():
             raise ValueError("the points dont defines a square")
+    @classmethod
+    def from_points(cls, point1: 'Point', point2: 'Point'):
+        # Create a square 
+        return cls(point1, point2)

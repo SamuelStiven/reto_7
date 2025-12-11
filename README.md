@@ -1,42 +1,40 @@
-Geometric Shapes Packages - Reto 5
+Geometry Shapes with Python Decorators reto - 7
 
-Description
-Implementation of a geometric shapes system in Python, demonstrating two package organization approaches.
+# Overview
+Extension of the geometry shapes system from Challenge #5, now enhanced with Python decorators to demonstrate advanced OOP concepts.
 
-Project Structure
+# Added Decorators
 
-Option 1 - Single Module
+## 1. @property Decorators
+All protected attributes are now accessible through properties:
 
-module_shapes/
-shapes.py: All classes in a single module
+- shape.vertices - Returns tuple of vertices
+- shape.edges - Returns tuple of edges
+- shape.shape_type - Returns class name
+- shape.num_vertices - Returns vertex count
+- shape.num_edges - Returns edge count
 
-main.py: Test code for option 1
+## 2. @classmethod Decorators
+Factory methods for creating shapes:
+- New alternative to constructor
+  - Rectangle.from_points(p1, p2)
+  - Square.from_points(p1, p2) 
+  - TriangleEquilateral.from_points(p1, p2, p3)
+  - TriangleIsosceles.from_points(p1, p2, p3)
+  - TriangleScalene.from_points(p1, p2, p3)
+  - TriangleRectangle.from_points(p1, p2, p3)
 
-Option 2 - Separate Modules
+## 3. Custom @time_execution Decorator
+Measures execution time of computational methods:
+- Applied to compute_area(), compute_perimeter(), 
+- Automatically prints: "compute_area executed in 0.000012 seconds"
+- Located in shape.py as a standalone decorator function
 
-individual_modules_shapes/
+# File Structure
+- shape.py - Base class with all decorators
+- rectangle.py - Rectangle/Square with classmethods
+- triangle.py - Triangle subclasses with classmethods
+- point_line.py - Point and Line classes
+- main.py - Updated to use classmethods
 
-point_line.py: Point and Line classes
-
-shape_base.py: Base Shape class
-
-rectangles.py: Rectangle and Square
-
-triangles.py: All triangle types
-
-main.py: Test code for option 2
-
-How to run
-
-
-# Option 1 - Single module
-bash
-
-cd module_shapes
-python main.py
-
-# Option 2 - Separate modules
-bash
-
-cd individual_modules_shapes
-python main.py
+Note: This extends the existing Challenge #5 code without breaking original functionality.

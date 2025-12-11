@@ -7,7 +7,11 @@ class Triangle(Shape):
         vertices = [point1, point2, point3]
         edges = [Line(point1, point2), Line(point2, point3), Line(point3, point1)]
         super().__init__(vertices=vertices, edges=edges)
-
+    
+    @classmethod
+    def from_points(cls, point1: 'Point', point2: 'Point', point3: 'Point'):
+        return cls(point1, point2, point3)
+    
     def compute_perimeter(self):
         return sum(edge.length() for edge in self._edges)
 
@@ -19,6 +23,10 @@ class TriangleEquilateral(Triangle):
         
         if not (lengths[0] == lengths[1] == lengths[2]):
             raise ValueError("the points don't define an equilateral triangle")
+    
+    @classmethod
+    def from_points(cls, point1: 'Point', point2: 'Point', point3: 'Point'):
+        return cls(point1, point2, point3)
     
     def compute_area(self):
         a = self._edges[0].length()
@@ -41,6 +49,10 @@ class TriangleIsosceles(Triangle):
             raise ValueError("the points don't define an isosceles triangle")
         elif lengths[0] == lengths[1] == lengths[2]:
             raise ValueError("the points define an equilateral triangle, not an isosceles triangle")
+    
+    @classmethod
+    def from_points(cls, point1: 'Point', point2: 'Point', point3: 'Point'):
+        return cls(point1, point2, point3)
         
     def compute_area(self):
         a = self._edges[0].length()
@@ -94,6 +106,9 @@ class TriangleScalene(Triangle):
         if lengths[0] == lengths[1] or lengths[1] == lengths[2] or lengths[0] == lengths[2]:
             raise ValueError("the points don't define a scalene triangle")
     
+    @classmethod
+    def from_points(cls, point1: 'Point', point2: 'Point', point3: 'Point'):
+        return cls(point1, point2, point3)
     def compute_area(self):
         a = self._edges[0].length()
         b = self._edges[1].length()
@@ -131,6 +146,10 @@ class TriangleRectangle(Triangle):
         
         if not (abs(lengths[0]**2 + lengths[1]**2 - lengths[2]**2) < 1e-9):
             raise ValueError("the points don't define a right triangle")
+    
+    @classmethod
+    def from_points(cls, point1: 'Point', point2: 'Point', point3: 'Point'):
+        return cls(point1, point2, point3)
     
     def compute_area(self):
         lengths = [edge.length() for edge in self._edges]
